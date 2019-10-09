@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "hello node",
+            "invocationName": "change me",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -27,9 +27,279 @@
                         "say hello world",
                         "say hello"
                     ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "QueueUpQuestionIntent",
+                    "slots": [],
+                    "samples": [
+                        "I'm ready",
+                        "Ready"
+                    ]
+                },
+                {
+                    "name": "AnswerIntent",
+                    "slots": [
+                        {
+                            "name": "userAnswer",
+                            "type": "TrueFalse"
+                        }
+                    ],
+                    "samples": [
+                        "i know the answer",
+                        "the answer is {userAnswer}",
+                        "I have an answer"
+                    ]
+                },
+                {
+                    "name": "GenerateQuestionQueue",
+                    "slots": [
+                        {
+                            "name": "NumberOfQuestions",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{catagory} {NumberOfQuestions} {Difficulty} "
+                            ]
+                        },
+                        {
+                            "name": "Difficulty",
+                            "type": "Difficulty",
+                            "samples": [
+                                "{Difficulty}"
+                            ]
+                        },
+                        {
+                            "name": "catagory",
+                            "type": "catagory",
+                            "samples": [
+                                "{catagory}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "{catagory} {NumberOfQuestions} {Difficulty}",
+                        "{catagory} {NumberOfQuestions} {Difficulty} question",
+                        "{catagory} {NumberOfQuestions} {Difficulty} questions ",
+                        "I want {catagory} {NumberOfQuestions}  {Difficulty} questions."
+                    ]
+                },
+                {
+                    "name": "QuickGameIntent",
+                    "slots": [],
+                    "samples": [
+                        "quick game"
+                    ]
                 }
             ],
-            "types": []
-        }
+            "types": [
+                {
+                    "name": "TrueFalse",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "false"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "true"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Difficulty",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "medium",
+                                "synonyms": [
+                                    "average"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "hard",
+                                "synonyms": [
+                                    "challenging",
+                                    "difficult",
+                                    "Hard"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "easy",
+                                "synonyms": [
+                                    "simple"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "catagory",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "general"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "science"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "geography"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "history"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "AnswerIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "userAnswer",
+                            "type": "TrueFalse",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "QueueUpQuestionIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": []
+                },
+                {
+                    "name": "GenerateQuestionQueue",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "NumberOfQuestions",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.63745901327.1239562595452"
+                            }
+                        },
+                        {
+                            "name": "Difficulty",
+                            "type": "Difficulty",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.63745901327.51796712960"
+                            }
+                        },
+                        {
+                            "name": "catagory",
+                            "type": "catagory",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1461789545426.403784889639"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Confirm.Intent.1509073191578",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Are you sure you want to lock in with {userAnswer}"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.676992291522.1146554547623",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Please answer with true or false."
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.238920962437.1023008297188",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "I need to know how many questions to queue up."
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.238920962437.1543421730535",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "I need to know how difficult to make the questions."
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.63745901327.1239562595452",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "I need to know the catagory, how many questions and how difficulty to queue up. You pick from between one and thirty questions and a difficulty of easy, medium or hard."
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.63745901327.51796712960",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "I need to know how difficult the questions whould be."
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.63745901327",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Say ready when you want to to ask the question."
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1461789545426.403784889639",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Please provide a catagory"
+                    }
+                ]
+            }
+        ]
     }
 }
